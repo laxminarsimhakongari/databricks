@@ -9,6 +9,7 @@ resources:
         pause_status: ${var.schedule_pause_status}
       tasks:
         - task_key: write_daily_health_record
+          environment_key: default
           spark_python_task:
             python_file: ../src/daily_job.py
             parameters:
@@ -19,6 +20,11 @@ resources:
       tags:
         managed_by: databricks-bundle
         workload: daily
+
+environments:
+  default:
+    spec:
+      client: "1"
 
 variables:
   schedule_pause_status:
