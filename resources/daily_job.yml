@@ -1,9 +1,4 @@
 resources:
-  environments:
-    serverless:
-      spec:
-        compute:
-          kind: SERVERLESS
   jobs:
     daily_job:
       name: ${bundle.name}-${bundle.target}
@@ -32,8 +27,20 @@ variables:
     default: PAUSED
 
 targets:
+  dev:
+    resources:
+      environments:
+        serverless:
+          spec:
+            compute:
+              kind: SERVERLESS
   prod:
     resources:
+      environments:
+        serverless:
+          spec:
+            compute:
+              kind: SERVERLESS
       jobs:
         daily_job:
           schedule:
