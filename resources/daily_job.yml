@@ -1,4 +1,9 @@
 resources:
+  environments:
+    serverless:
+      spec:
+        compute:
+          kind: SERVERLESS
   jobs:
     daily_job:
       name: ${bundle.name}-${bundle.target}
@@ -9,7 +14,7 @@ resources:
         pause_status: ${var.schedule_pause_status}
       tasks:
         - task_key: write_daily_health_record
-          serverless_compute: true
+          environment_key: serverless
           spark_python_task:
             python_file: ../src/daily_job.py
             parameters:
