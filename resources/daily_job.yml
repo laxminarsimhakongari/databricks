@@ -7,16 +7,9 @@ resources:
         quartz_cron_expression: 0 0 6 * * ?
         timezone_id: UTC
         pause_status: ${var.schedule_pause_status}
-      job_clusters:
-        - job_cluster_key: daily_job_cluster
-          new_cluster:
-            spark_version: 15.4.x-scala2.12
-            node_type_id: i3.xlarge
-            num_workers: 1
-            data_security_mode: USER_ISOLATION
       tasks:
         - task_key: write_daily_health_record
-          job_cluster_key: daily_job_cluster
+          compute_key: serverless_compute
           spark_python_task:
             python_file: ../src/daily_job.py
             parameters:
