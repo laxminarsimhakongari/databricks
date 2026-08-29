@@ -9,7 +9,7 @@ resources:
         pause_status: ${var.schedule_pause_status}
       tasks:
         - task_key: write_daily_health_record
-          compute_key: serverless_compute
+          serverless_compute: true
           spark_python_task:
             python_file: ../src/daily_job.py
             parameters:
