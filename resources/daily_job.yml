@@ -7,9 +7,16 @@ resources:
         quartz_cron_expression: 0 0 6 * * ?
         timezone_id: UTC
         pause_status: ${var.schedule_pause_status}
+      job_clusters:
+        - job_cluster_key: daily_job_cluster
+          new_cluster:
+            spark_version: 15.4.x-scala2.12
+            node_type_id: i3.xlarge
+            num_workers: 1
+            data_security_mode: USER_ISOLATION
       tasks:
         - task_key: write_daily_health_record
-          environment_key: default
+          job_cluster_key: daily_job_cluster
           spark_python_task:
             python_file: ../src/daily_job.py
             parameters:
@@ -20,11 +27,6 @@ resources:
       tags:
         managed_by: databricks-bundle
         workload: daily
-
-environments:
-  default:
-    spec:
-      client: "1"
 
 variables:
   schedule_pause_status:
