@@ -65,6 +65,7 @@ pipeline {
                             bat '''
                                 @echo off
                                 set DATABRICKS_HOST=%DATABRICKS_HOST%
+                                set DATABRICKS_TOKEN=%DATABRICKS_TOKEN%
                                 databricks bundle validate -t %BUNDLE_TARGET%
                             '''
                         }
@@ -88,6 +89,7 @@ pipeline {
                             bat '''
                                 @echo off
                                 set DATABRICKS_HOST=%DATABRICKS_HOST%
+                                set DATABRICKS_TOKEN=%DATABRICKS_TOKEN%
                                 databricks bundle deploy -t %BUNDLE_TARGET%
                                 databricks bundle run -t %BUNDLE_TARGET% daily_job
                             '''
